@@ -10,7 +10,7 @@ renamed as (
 
     select
         pdt_id,
-        purchSE_PRICE
+        cast(purchSE_PRICE as FLOAT64) as purchase_price,
     from source
 
 )
