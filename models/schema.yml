@@ -6,6 +6,14 @@ sources:
     tables:
       - name: sales
         identifier: raw_gz_sales
+        loaded_at_field: "CAST(date_date AS TIMESTAMP)"
+        freshness:
+          warn_after: { count: 90, period: day }
+
+        columns:
+          - name: date_date
+            description: date of purchase
+        
       - name: product
         identifier: raw_gz_product
       - name: ship
