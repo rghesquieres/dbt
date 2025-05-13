@@ -4,9 +4,9 @@ sources:
     schema: gz_raw_data
     description: "Dataset brut BigQuery avec alias simplifié"
     tables:
-      - name: raw_gz_sales
-        alias: sales
-      - name: raw_gz_product
-        alias: product
-      - name: raw_gz_ship
-        alias: ship
+      - name: sales
+        identifier: raw_gz_sales
+      - name: product
+        identifier: raw_gz_product
+      - name: ship
+        identifier: raw_gz_ship
