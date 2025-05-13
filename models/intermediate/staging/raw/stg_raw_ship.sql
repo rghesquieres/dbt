@@ -7,8 +7,8 @@ renamed as (
     select
         orders_id,
         cast(ship_cost as FLOAT64) as ship_cost,
-        shipping_fee
-        -- on supprime volontairement shipping_fee_1
+        shipping_fee,
+        `logCost`
     from source
 )
 
