@@ -19,7 +19,7 @@ joined as (
         sales.revenue - (sales.quantity * products.purchase_price) as margin
     from sales
     left join products
-        on sales.products_id = products.products_id
+        on sales.pdt_id = products.products_id
 )
 
 select * from joined
