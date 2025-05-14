@@ -12,7 +12,7 @@ ship as (
 sales as (
     select *
     from {{ ref('int_sales_margin') }}
-)
+),
 
 joined as (
     select
