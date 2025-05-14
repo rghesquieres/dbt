@@ -1,4 +1,4 @@
-name: 'dbt_rghesquieres_first'
+name: 'dbt_rghesquieres'
 version: '1.0.0'
 config-version: 2
 
@@ -21,10 +21,12 @@ clean-targets:
 
 # Configuration des modèles
 models:
-  dbt_rghesquieres_first:        
+  rghesquieres:        
     staging:
       +materialized: view       # tous les stg_ en vue
     intermediate:
       +materialized: view       # int_ en vue (par défaut, mais changeable)
     mart:
       +materialized: table      # tous les mart_ en table
+      finance:
+        +schema : finance
