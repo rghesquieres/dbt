@@ -16,5 +16,5 @@ select
 
 from {{ ref("finance_days") }} f
 left join {{ ref("int_campaigns_day") }} c on f.date_date = c.date_date
-
+where ads_cost is not null
 order by f.date_date desc
