@@ -22,7 +22,7 @@ clean-targets:
 # Configuration des modèles
       
 models:
-  rghesquieres:
+  dbt_rghesquieres:
     staging:
       +materialized: view
     intermediate:
