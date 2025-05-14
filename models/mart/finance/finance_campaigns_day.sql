@@ -11,10 +11,9 @@ select
     f.purchase_cost,
     f.margin,
     f.shipping_fee,
-    f.logcost,
+    f.log_cost,
     f.ship_cost
 
 from {{ ref("finance_days") }} f
 left join {{ ref("int_campaigns_day") }} c on f.date_date = c.date_date
-where ads_cost is not null
 order by f.date_date desc
