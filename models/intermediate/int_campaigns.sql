@@ -1,34 +1,47 @@
-sources:
-  - name: raw
-    schema: gz_raw_data
-    description: "Dataset brut BigQuery avec alias simplifié"
-    tables:
-      - name: sales
-        identifier: raw_gz_sales
-        loaded_at_field: "CAST(date_date AS TIMESTAMP)"
-        freshness:
-          warn_after: { count: 90, period: day }
+-- models/intermediate/int_campaigns.sql
 
-        columns:
-          - name: date_date
-            description: date of purchase
-        
-      - name: product
-        identifier: raw_gz_product
-      - name: ship
-        identifier: raw_gz_ship
-      - name: adwords
-        identifier: raw_gz_adwords
-        description: "Données publicitaires provenant de Google Adwords"
+SELECT
+  date_date,
+  paid_source,
+  campaign_key,
+  campaign_name,
+  CAST(ads_cost AS FLOAT64) AS ads_cost,
+  impression,
+  click
+FROM {{ ref('stg_raw__adwords') }}
 
-      - name: bing
-        identifier: raw_gz_bing
-        description: "Données publicitaires provenant de Bing"
+UNION ALL
 
-      - name: criteo
-        identifier: raw_gz_criteo
-        description: "Données publicitaires provenant de Criteo"
+SELECT
+  date_date,
+  paid_source,
+  campaign_key,
+  campaign_name,
+  CAST(ads_cost AS FLOAT64) AS ads_cost,
+  impression,
+  click
+FROM {{ ref('stg_raw__bing') }}
 
-      - name: facebook
-        identifier: raw_gz_facebook
-        description: "Données publicitaires provenant de Facebook"
+UNION ALL
+
+SELECT
+  date_date,
+  paid_source,
+  campaign_key,
+  campaign_name,
+  CAST(ads_cost AS FLOAT64) AS ads_cost,
+  impression,
+  click
+FROM {{ ref('stg_raw__criteo') }}
+
+UNION ALL
+
+SELECT
+  date_date,
+  paid_source,
+  campaign_key,
+  campaign_name,
+  CAST(ads_cost AS FLOAT64) AS ads_cost,
+  impression,
+  click
+FROM {{ ref('stg_raw__facebook') }}
