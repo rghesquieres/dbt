@@ -20,13 +20,14 @@ clean-targets:
   - "dbt_packages"
 
 # Configuration des modèles
+      
 models:
-  rghesquieres:        
+  rghesquieres:
     staging:
-      +materialized: view       # tous les stg_ en vue
+      +materialized: view
     intermediate:
-      +materialized: view       # int_ en vue (par défaut, mais changeable)
+      +materialized: view
     mart:
-      +materialized: table      # tous les mart_ en table
+      +materialized: table
       finance:
-        +schema : finance
+        +schema: finance
