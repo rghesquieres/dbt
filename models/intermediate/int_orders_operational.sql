@@ -19,6 +19,7 @@ joined as (
         orders_margin.orders_id,
         orders_margin.date_date,
         sum(sales.revenue) as revenue,
+        sum(sales.margin) as margin,
         orders_margin.operational_margin
             + ship.shipping_fee
             - ship.`logCost`
