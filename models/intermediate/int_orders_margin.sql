@@ -1,16 +1,14 @@
-with sales_margin as (
-    select *
-    from {{ ref('int_sales_margin') }}
-),
+  -- int_sales_margin.sql
 
-aggregated as (
-    select
-        orders_id,
-        date_date,
-        sum(margin) as operational_margin,
-        sum(quantity) as quantity
-    from sales_margin
-    group by orders_id, date_date
-)
-
-select * from aggregated
+  SELECT
+      products_id,
+      date_date,
+      orders_id,
+      revenue,
+      quantity,
+      purchase_price,
+      ROUND(s.quantity*p.purchase_price,2) AS purchase_cost,
+      ROUND(s.revenue - s.quantity*p.purchase_price, 2) AS margin
+  FROM {{ref("stg_raw_sales")}} s
+  LEFT JOIN {{ref("stg_raw_product")}} p
+      USING (products_id)
