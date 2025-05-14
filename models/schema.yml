@@ -18,3 +18,18 @@ sources:
         identifier: raw_gz_product
       - name: ship
         identifier: raw_gz_ship
+models:
+  - name: stg_raw__sales
+    description: "Staging sales data"
+    config:
+      materialized: view
+
+  - name: stg_raw__product
+    description: "Staging product data"
+    config:
+      materialized: view
+
+  - name: stg_raw__ship
+    description: "Staging ship data"
+    config:
+      materialized: view
