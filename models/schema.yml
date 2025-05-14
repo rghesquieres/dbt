@@ -1,4 +1,3 @@
-
 sources:
   - name: raw
     schema: gz_raw_data
@@ -9,15 +8,16 @@ sources:
         loaded_at_field: "CAST(date_date AS TIMESTAMP)"
         freshness:
           warn_after: { count: 90, period: day }
-
         columns:
           - name: date_date
             description: date of purchase
-        
+
       - name: product
         identifier: raw_gz_product
+
       - name: ship
         identifier: raw_gz_ship
+
       - name: adwords
         identifier: raw_gz_adwords
         description: "Données publicitaires provenant de Google Adwords"
@@ -34,3 +34,35 @@ sources:
         identifier: raw_gz_facebook
         description: "Données publicitaires provenant de Facebook"
 
+models:
+  - name: int_campaigns
+    description: "Données unifiées des campagnes publicitaires issues de 4 régies : Adwords, Bing, Facebook, Criteo"
+    columns:
+      - name: campaign_key
+        description: Identifiant unique de la campagne
+        tests:
+          - not_null
+          - unique
+
+      - name: date_date
+        description: Date de diffusion de la campagne
+        tests:
+          - not_null
+
+      - name: paid_source
+        description: Source payante (adwords, bing, facebook, criteo)
+        tests:
+          - accepted_values:
+              values: ['adwords', 'bing', 'facebook', 'criteo']
+
+      - name: campaign_name
+        description: Nom marketing de la campagne
+
+      - name: ads_cost
+        description: Coût publicitaire en euros (casté en float64)
+
+      - name: impression
+        description: Nombre d’impressions générées
+
+      - name: click
+        description: Nombre de clics générés
